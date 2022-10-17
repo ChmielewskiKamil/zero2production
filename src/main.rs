@@ -7,7 +7,7 @@ use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
  * handler is used
  */
 
-async fn health_check(req: HttpRequest) -> impl Responder {
+async fn health_check() -> impl Responder {
     HttpResponse::Ok()
 }
 
