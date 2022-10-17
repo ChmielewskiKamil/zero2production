@@ -6,10 +6,6 @@ use actix_web::{web, App, HttpRequest, HttpResponse, HttpServer, Responder};
  * to a matching registered endpoint -->
  * handler is used
  */
-async fn greet(req: HttpRequest) -> impl Responder {
-    let name = req.match_info().get("name").unwrap_or("World");
-    format!("Hello {}!", &name)
-}
 
 async fn health_check(req: HttpRequest) -> impl Responder {
     HttpResponse::Ok()
@@ -19,10 +15,8 @@ async fn health_check(req: HttpRequest) -> impl Responder {
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            // this request is only passed to the handler
-            // if the method is GET
-            .route("/", web::get().to(greet))
-            .route("/{name}", web::get().to(greet))
+        // this request is only passed to the handler
+        // if the method is GET
     })
     .bind("127.0.0.1:8000")?
     .run()
