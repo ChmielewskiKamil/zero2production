@@ -24,7 +24,8 @@ async fn health_check_should_return_ok() {
 }
 
 fn spawn_app() {
-    let server = zero2production::run().expect("Failed to bind address");
+    // trying to bind port 0 will trigger OS search for available ports
+    let server = zero2production::run("127.0.0.1:0").expect("Failed to bind address");
 
     // thanks to the refactoring of the run() function
     // spawn_app does not have to be async
